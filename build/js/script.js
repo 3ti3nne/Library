@@ -31,13 +31,25 @@ submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   addBook(new Book(title.value, author.value, pages.value, finito.checked));
   d.querySelector(".btn-close").click();
-  console.log(library);
 
   let newCardBook = d.createElement("div");
+
   if (library.length > 0) {
     library.forEach((book) => {
-      newCardBook.className +=
-        "w-full max-w-sm h-32 bg-white border border-gray-200 rounded-lg shadow-md bg-gray-500";
+      const card = `
+      <div style="background-image: url('./css/book.jpg'); background-size: cover;" class="w-40 h-56 p-3 bg-white border border-gray-400 rounded-lg shadow-md grid grid-flow-row gap-2 place-content-center content-center justify-center hover:scale-105 duration-300 ease-in-out">
+      <h5 class="font-bold mb-1">${book.title}</h5>
+      <p class="text-gray-700 text-base justify-self-center">${book.author}</p>
+      <p class="text-gray-700 text-base justify-self-center">${
+        book.pages
+      } pages</p>
+      <p class="text-gray-700 text-base justify-self-center">${
+        book.read ? "Fini" : "En cours"
+      }</p>
+      <button class="bg-black hover:bg-red-700 text-white w-10 font-bold rounded-full justify-self-center">X</button>
+      </div>`;
+      console.log(book);
+      newCardBook.innerHTML = card;
     });
     placeToAppendCars.appendChild(newCardBook);
   }
